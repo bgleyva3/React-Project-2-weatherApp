@@ -15,14 +15,14 @@ function App() {
     if(cityInput !== null){
       console.log("Calling data")
       console.log("---------------------")
-      fetch(`http://api.openweathermap.org/data/2.5/weather?q=${cityInput}&units=metric&appid=e6e87dada02bba6c6a163fe04f869432`)
+      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&units=metric&appid=e6e87dada02bba6c6a163fe04f869432`)
       .then(response => response.json())
       .then(data => {
         setCity(data["name"])
         setCountry(data["sys"]["country"])
         setTemp(data["main"]["temp"]+"°C")
         setWeather(data["weather"][0]["description"])
-        setIcon(<img src={`http://openweathermap.org/img/wn/${data["weather"][0]["icon"]}@2x.png`}></img>)
+        setIcon(<img src={`https://openweathermap.org/img/wn/${data["weather"][0]["icon"]}@2x.png`}></img>)
         
       })
       .catch(err => alert(err))
