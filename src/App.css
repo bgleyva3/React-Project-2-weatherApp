@@ -1,48 +1,48 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-family: 'Assistant', sans-serif;
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
+ 
 body{
   height: 100%;
   margin: 0;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  /* background-image: linear-gradient(rgb(67, 133, 233),rgb(237, 238, 153)); */
-
+  background-image: linear-gradient(rgb(155, 201, 240),rgb(193, 241, 166)); 
 }
 
+
+.search-bar-container{
+  position: absolute;
+  top: 2rem;
+  left: 0;
+  right: 0;
+}
+
+.container-style{
+  background-color: rgba(255, 255, 255, 0.61);
+  padding: 1rem;
+  width: 18rem;
+  border-radius: 6px;
+  margin: auto;
+}
+
+.container-position{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+#current-city{
+  margin-top: 1rem;
+}
+
+#weather-font{
+  font-family: 'Shrikhand', cursive;
+  color: rgb(241, 114, 135);
+  text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+}

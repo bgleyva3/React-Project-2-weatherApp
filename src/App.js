@@ -3,6 +3,7 @@ import {useState, useEffect} from "react"
 
 
 function App() {
+  const [reposition, setReposition] = useState(null)
   const [inputOnChange, setInputOnChange] = useState("inputKeeper")
   const [cityInput, setCityInput] = useState(null)
   const [city, setCity] = useState("")
@@ -15,6 +16,8 @@ function App() {
   const [letInputRender, setLetInputRender] = useState(null)
   const [backgroundColor, setBackgroundColor] = useState(null)
   const [iconCode, setIconCode] = useState(null)
+  const [display, setDisplay] = useState("none")
+
 
   useEffect(()=>{
     if(cityInput !== null){
@@ -23,7 +26,7 @@ function App() {
       fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&units=metric&appid=e6e87dada02bba6c6a163fe04f869432`)
       .then(response => response.json())
       .then(data => {
-        setCity(data["name"])
+        setCity(data["name"]+" / ")
         setCountry(data["sys"]["country"])
         setTemp(data["main"]["temp"])
         setUnits("°C")
@@ -31,6 +34,7 @@ function App() {
         setIcon(<img src={`https://openweathermap.org/img/wn/${data["weather"][0]["icon"]}@2x.png`}></img>)
         setLoading(false)
         setIconCode(data["weather"][0]["icon"])
+        setDisplay("inline-block")
       })
       .catch(err => alert(err))
   }}, [cityInput])
@@ -39,7 +43,8 @@ function App() {
     elem.preventDefault();
     setLoading(true)
     setCityInput(null)
-    setLetInputRender(Math.random())    
+    setLetInputRender(Math.random())
+    setDisplay("none")    
   }
 
   useEffect(()=>{
@@ -67,6 +72,7 @@ function App() {
         setUnits("")
         setWeather("")
         setIcon("")
+        setDisplay("none")
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback)
   }
 
@@ -185,22 +191,29 @@ function App() {
 
   return (
     <div className="App" > 
-      <form onSubmit={submitFunc}>
-        <input placeholder="Enter City" onChange={(elem)=>setInputOnChange(elem.target.value)}></input>
-        <input type="submit"></input>
-        <br/>
-      </form>
-      <button onClick={currentLocation}>Current City</button>
-      {
-        loading ?
-          <h1>LOADING</h1>
-          : <div></div>
-      }
-      <h1>{city}</h1>
-      <h1>{country}</h1>
-      <h1>{temp}{units}</h1><button onClick={converter}>°C ⟷ °F</button>
-      <h1>{weather}</h1>
-      <div>{icon}</div>
+      <div className="search-bar-container" >
+        <h1 id="weather-font">Weather App</h1>
+        <br></br>
+        <div className="container-style">
+          <form onSubmit={submitFunc}>
+            <input placeholder="Enter City" onChange={(elem)=>setInputOnChange(elem.target.value)}></input>
+            <input type="submit" value="Search"></input>
+          </form>
+          <button id="current-city" onClick={currentLocation}>Locate my City</button>
+        </div>
+      </div>
+      <div className="container-position">
+        {
+          loading ?
+            <h1>LOADING</h1>
+            : <div></div>
+        }
+        <h1>{city}{country}</h1>
+        <h1>{temp}{units}</h1>
+        <h1>{weather}</h1>
+        <div>{icon}</div>
+        <button style={{display: display}} onClick={converter}>°C ⟷ °F</button>
+      </div>
     </div>
   );
 }
