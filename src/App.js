@@ -9,10 +9,12 @@ function App() {
   const [country, setCountry] = useState("")
   const [temp, setTemp] = useState("")
   const [weather, setWeather] = useState("")
-  const [icon, setIcon] = useState("")
+  const [icon, setIcon] = useState(null)
   const [units, setUnits] = useState("")
   const [loading, setLoading] = useState(false)
   const [letInputRender, setLetInputRender] = useState(null)
+  const [backgroundColor, setBackgroundColor] = useState(null)
+  const [iconCode, setIconCode] = useState(null)
 
   useEffect(()=>{
     if(cityInput !== null){
@@ -28,6 +30,7 @@ function App() {
         setWeather(data["weather"][0]["description"])
         setIcon(<img src={`https://openweathermap.org/img/wn/${data["weather"][0]["icon"]}@2x.png`}></img>)
         setLoading(false)
+        setIconCode(data["weather"][0]["icon"])
       })
       .catch(err => alert(err))
   }}, [cityInput])
@@ -105,8 +108,83 @@ function App() {
       console.log(temp + units)
     }
 
+
+    useEffect(()=>{
+      if(iconCode !== null){
+        const colorRed = ["01d", "02d"]
+        const colorBlueLight = ["03d", "04d", "09d", "10d"]
+        const colorYellow = ["11d"]
+        const colorBlue = ["13d"]
+        const colorGray = ["50d"]
+        const colorBlueDark = ["01n", "02n", "03n", "04n", "13n"]
+        const colorPurple = ["09n", "10n", "11n"]
+        const colorGrayDark = ["50n"]
+        colorRed.forEach(elem => {
+          if(elem === iconCode){
+            console.log("RED")
+            setBackgroundColor("linear-gradient(rgb(132, 200, 255),rgb(255, 207, 118))")
+          }
+        })
+
+        colorBlueLight.forEach(elem => {
+          if(elem === iconCode){
+            console.log("BlueLight")
+            setBackgroundColor("linear-gradient(rgb(67, 133, 233),rgb(237, 238, 153))")
+          }
+        })
+
+        colorYellow.forEach(elem => {
+          if(elem === iconCode){
+            console.log("YELLOW")
+            setBackgroundColor("linear-gradient(rgb(109, 45, 194),rgb(253, 255, 161))")
+          }
+        })
+
+        colorBlue.forEach(elem => {
+          if(elem === iconCode){
+            setBackgroundColor("linear-gradient(rgb(26, 124, 204),rgb(226, 249, 255))")
+          }
+        })
+
+        colorGray.forEach(elem => {
+          if(elem === iconCode){
+            setBackgroundColor("linear-gradient(rgb(64, 106, 153), rgb(173, 194, 207))")
+          }
+        })
+
+        colorBlueDark.forEach(elem => {
+          if(elem === iconCode){
+            console.log("BlueDark")
+            setBackgroundColor("linear-gradient(rgb(23, 29, 90), rgb(79, 146, 235))")
+          }
+        })
+
+        colorPurple.forEach(elem => {
+          if(elem === iconCode){
+            setBackgroundColor("linear-gradient(rgb(43, 30, 90),rgb(165, 156, 245))")
+          }
+        })
+
+        colorGrayDark.forEach(elem => {
+          if(elem === iconCode){
+            setBackgroundColor("linear-gradient(rgb(105, 111, 194),rgb(42, 45, 65))")
+          }
+        })
+
+
+      }
+    }, [iconCode])
+
+    useEffect(()=>{
+      
+      if(backgroundColor !== null){
+        document.body.style.backgroundImage = backgroundColor
+      }
+    },[backgroundColor])
+    
+
   return (
-    <div className="App">
+    <div className="App" > 
       <form onSubmit={submitFunc}>
         <input placeholder="Enter City" onChange={(elem)=>setInputOnChange(elem.target.value)}></input>
         <input type="submit"></input>
