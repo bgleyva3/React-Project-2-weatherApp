@@ -10,6 +10,7 @@ function App() {
   const [temp, setTemp] = useState("")
   const [weather, setWeather] = useState("")
   const [icon, setIcon] = useState("")
+  const [units, setUnits] = useState("")
 
   useEffect(()=>{
     if(cityInput !== null){
@@ -20,7 +21,8 @@ function App() {
       .then(data => {
         setCity(data["name"])
         setCountry(data["sys"]["country"])
-        setTemp(data["main"]["temp"]+"°C")
+        setTemp(data["main"]["temp"])
+        setUnits("°C")
         setWeather(data["weather"][0]["description"])
         setIcon(<img src={`https://openweathermap.org/img/wn/${data["weather"][0]["icon"]}@2x.png`}></img>)
         
@@ -67,6 +69,19 @@ function App() {
       alert(err.message)
     }
 
+    const converter = () => {
+      if(units === "°C"){
+        const CtoF = (temp * (9/5)) + 32
+        setTemp(CtoF.toFixed(1))
+        setUnits("°F")
+      } else {
+        const FtoC = (temp - 32) * 5/9
+        setTemp(FtoC.toFixed(1))
+        setUnits("°C")
+      }
+      console.log(temp + units)
+    }
+
   return (
     <div className="App">
       <form onSubmit={submitFunc}>
@@ -77,7 +92,7 @@ function App() {
       <button onClick={currentLocation}>Current City</button>
       <h1>{city}</h1>
       <h1>{country}</h1>
-      <h1>{temp}</h1>
+      <h1>{temp}{units}</h1><button onClick={converter}>°C ⟷ °F</button>
       <h1>{weather}</h1>
       <div>{icon}</div>
     </div>
