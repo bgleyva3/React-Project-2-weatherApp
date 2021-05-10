@@ -3,7 +3,7 @@ import {useState, useEffect} from "react"
 
 
 function App() {
-  const [inputKeeper, setInputKeeper] = useState("inputKeeper")
+  const [inputOnChange, setInputOnChange] = useState("inputKeeper")
   const [cityInput, setCityInput] = useState(null)
   const [city, setCity] = useState("")
   const [country, setCountry] = useState("")
@@ -11,6 +11,8 @@ function App() {
   const [weather, setWeather] = useState("")
   const [icon, setIcon] = useState("")
   const [units, setUnits] = useState("")
+  const [loading, setLoading] = useState(false)
+  const [letInputRender, setLetInputRender] = useState(null)
 
   useEffect(()=>{
     if(cityInput !== null){
@@ -25,23 +27,43 @@ function App() {
         setUnits("°C")
         setWeather(data["weather"][0]["description"])
         setIcon(<img src={`https://openweathermap.org/img/wn/${data["weather"][0]["icon"]}@2x.png`}></img>)
-        
+        setLoading(false)
       })
       .catch(err => alert(err))
-
-      //.catch(err => alert(err))
   }}, [cityInput])
 
   const submitFunc = (elem) => {
     elem.preventDefault();
-    setCityInput(inputKeeper)
-    console.log(cityInput)
+    setLoading(true)
+    setCityInput(null)
+    setLetInputRender(Math.random())    
   }
+
+  useEffect(()=>{
+    if(letInputRender !== null){
+        setCityInput(inputOnChange)
+        setCity("")
+        setCountry("")
+        setTemp("")
+        setUnits("")
+        setWeather("")
+        setIcon("")
+    console.log(cityInput)
+    }
+  },[letInputRender])
 
 
   //-------------current Location----------
 
   const currentLocation = () => {
+    setLoading(true)
+    setCityInput(null)
+        setCity("")
+        setCountry("")
+        setTemp("")
+        setUnits("")
+        setWeather("")
+        setIcon("")
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback)
   }
 
@@ -68,6 +90,7 @@ function App() {
     const errorCallback = (err) => {
       alert(err.message)
     }
+//---------------------------------------------
 
     const converter = () => {
       if(units === "°C"){
@@ -85,11 +108,16 @@ function App() {
   return (
     <div className="App">
       <form onSubmit={submitFunc}>
-        <input placeholder="Enter City" onChange={(elem)=>setInputKeeper(elem.target.value)}></input>
+        <input placeholder="Enter City" onChange={(elem)=>setInputOnChange(elem.target.value)}></input>
         <input type="submit"></input>
         <br/>
       </form>
       <button onClick={currentLocation}>Current City</button>
+      {
+        loading ?
+          <h1>LOADING</h1>
+          : <div></div>
+      }
       <h1>{city}</h1>
       <h1>{country}</h1>
       <h1>{temp}{units}</h1><button onClick={converter}>°C ⟷ °F</button>
