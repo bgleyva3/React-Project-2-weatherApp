@@ -45,6 +45,7 @@ function App() {
     setCityInput(null)
     setLetInputRender(Math.random())
     setDisplay("none")    
+    setReposition(true)
   }
 
   useEffect(()=>{
@@ -65,6 +66,7 @@ function App() {
 
   const currentLocation = () => {
     setLoading(true)
+    setReposition(true)
     setCityInput(null)
         setCity("")
         setCountry("")
@@ -191,29 +193,47 @@ function App() {
 
   return (
     <div className="App" > 
-      <div className="search-bar-container" >
-        <h1 id="weather-font">Weather App</h1>
-        <br></br>
-        <div className="container-style">
-          <form onSubmit={submitFunc}>
-            <input placeholder="Enter City" onChange={(elem)=>setInputOnChange(elem.target.value)}></input>
-            <input type="submit" value="Search"></input>
-          </form>
-          <button id="current-city" onClick={currentLocation}>Locate my City</button>
+    {
+      reposition === null ? 
+        <div className="container-position">
+          <h1 id="weather-font">Weather App</h1>
+            <br></br>
+            <div className="container-style">
+              <form onSubmit={submitFunc}>
+                <input placeholder="Enter City" onChange={(elem)=>setInputOnChange(elem.target.value)}></input>
+                <input type="submit" value="Search"></input>
+              </form>
+              <button id="current-city" onClick={currentLocation}>Locate my City</button>
+            </div>
+        </div> 
+      : 
+        <div>
+            <div className="search-bar-container" >
+            <h1 id="weather-font">Weather App</h1>
+            <br></br>
+            <div className="container-style">
+              <form onSubmit={submitFunc}>
+                <input placeholder="Enter City" onChange={(elem)=>setInputOnChange(elem.target.value)}></input>
+                <input type="submit" value="Search"></input>
+              </form>
+              <button id="current-city" onClick={currentLocation}>Locate my City</button>
+            </div>
+          </div>
+          <div className="container-position">
+            {
+              loading ?
+                <h1>LOADING</h1>
+                : <div></div>
+            }
+            <h1>{city}{country}</h1>
+            <h1>{temp}{units}</h1>
+            <h1>{weather}</h1>
+            <div>{icon}</div>
+            <button style={{display: display}} onClick={converter}>°C ⟷ °F</button>
+          </div>
         </div>
-      </div>
-      <div className="container-position">
-        {
-          loading ?
-            <h1>LOADING</h1>
-            : <div></div>
-        }
-        <h1>{city}{country}</h1>
-        <h1>{temp}{units}</h1>
-        <h1>{weather}</h1>
-        <div>{icon}</div>
-        <button style={{display: display}} onClick={converter}>°C ⟷ °F</button>
-      </div>
+    }
+      
     </div>
   );
 }
