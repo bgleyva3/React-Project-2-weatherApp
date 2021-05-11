@@ -14,10 +14,7 @@ body{
 
 
 .search-bar-container{
-  position: absolute;
-  top: 2rem;
-  left: 0;
-  right: 0;
+  margin-top: 3rem;
 }
 
 .container-style{
@@ -28,13 +25,17 @@ body{
   margin: 0 auto 0 auto;
 }
 
+.search-bar-start{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 .container-position{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  flex-direction: column;
-  min-height: 100vh;
+  margin-top: 6rem;
 }
 
 #current-city{
@@ -45,5 +46,54 @@ body{
   font-family: 'Shrikhand', cursive;
   color: rgb(241, 114, 135);
   text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
-  
+}
+
+#weather-font-1{
+  font-family: 'Shrikhand', cursive;
+  font-size: 4rem;
+  color: rgb(241, 114, 135);
+  text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+}
+
+.container-style-1{
+  background-color: rgba(255, 255, 255, 0.61);
+  padding: 2rem;
+  width: 28rem;
+  border-radius: 6px;
+  margin: 0 auto 0 auto;
+}
+
+.container-style-1 input:first-child{
+  width: 18rem;
+}
+
+.container-style-1 input, .container-style-1 button{
+  font-size: 1.5rem;
+}
+
+.degrees-style{
+  font-size: 6rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.desc-style{
+  font-size: 1.5rem;
+}
+
+.CFbutton{
+  margin: 1.5rem;
+}
+
+.units{
+  display: flex;
+  align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.61);
+  margin-left: 0.5rem;
 }

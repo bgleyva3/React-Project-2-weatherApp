@@ -29,7 +29,7 @@ function App() {
         setCity(data["name"]+" / ")
         setCountry(data["sys"]["country"])
         setTemp(data["main"]["temp"])
-        setUnits("°C")
+        setUnits(" C")
         setWeather(data["weather"][0]["description"])
         setIcon(<img src={`https://openweathermap.org/img/wn/${data["weather"][0]["icon"]}@2x.png`}></img>)
         setLoading(false)
@@ -104,14 +104,14 @@ function App() {
 //---------------------------------------------
 
     const converter = () => {
-      if(units === "°C"){
+      if(units === " C"){
         const CtoF = (temp * (9/5)) + 32
         setTemp(CtoF.toFixed(1))
-        setUnits("°F")
+        setUnits(" F")
       } else {
         const FtoC = (temp - 32) * 5/9
         setTemp(FtoC.toFixed(1))
-        setUnits("°C")
+        setUnits(" C")
       }
       console.log(temp + units)
     }
@@ -195,10 +195,10 @@ function App() {
     <div className="App" > 
     {
       reposition === null ? 
-        <div className="container-position">
-          <h1 id="weather-font">Weather App</h1>
+        <div className="search-bar-start">
+          <h1 id="weather-font-1">Weather App</h1>
             <br></br>
-            <div className="container-style">
+            <div className="container-style-1">
               <form onSubmit={submitFunc}>
                 <input placeholder="Enter City" onChange={(elem)=>setInputOnChange(elem.target.value)}></input>
                 <input type="submit" value="Search"></input>
@@ -208,7 +208,7 @@ function App() {
         </div> 
       : 
         <div>
-            <div className="search-bar-container" >
+            <div className="search-bar-container">
             <h1 id="weather-font">Weather App</h1>
             <br></br>
             <div className="container-style">
@@ -226,10 +226,11 @@ function App() {
                 : <div></div>
             }
             <h1>{city}{country}</h1>
-            <h1>{temp}{units}</h1>
-            <h1>{weather}</h1>
+            <h1 className="degrees-style">{temp}<div className="units">{units}</div></h1>
             <div>{icon}</div>
-            <button style={{display: display}} onClick={converter}>°C ⟷ °F</button>
+            <h1 className="desc-style">{weather}</h1>
+      
+            <button className="CFbutton" style={{display: display}} onClick={converter}>°C ⟷ °F</button>
           </div>
         </div>
     }
