@@ -225,7 +225,7 @@ function App() {
                 <h1>LOADING</h1>
                 : <div></div>
             }
-            <h1>{city}{country}</h1>
+            <h1 className="city">{city}{country}</h1>
             <h1 className="degrees-style">{temp}<div className="units">{units}</div></h1>
             <div>{icon}</div>
             <h1 className="desc-style">{weather}</h1>
