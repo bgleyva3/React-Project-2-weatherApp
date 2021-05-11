@@ -1,5 +1,6 @@
 import './App.css';
 import {useState, useEffect} from "react"
+import Loading from "./Loading"
 
 
 function App() {
@@ -203,7 +204,7 @@ function App() {
                 <input placeholder="Enter City" onChange={(elem)=>setInputOnChange(elem.target.value)}></input>
                 <input type="submit" value="Search"></input>
               </form>
-              <button id="current-city" onClick={currentLocation}>Locate my City</button>
+              <button id="current-city" onClick={currentLocation}>Show my City</button>
             </div>
         </div> 
       : 
@@ -216,13 +217,13 @@ function App() {
                 <input placeholder="Enter City" onChange={(elem)=>setInputOnChange(elem.target.value)}></input>
                 <input type="submit" value="Search"></input>
               </form>
-              <button id="current-city" onClick={currentLocation}>Locate my City</button>
+              <button id="current-city" onClick={currentLocation}>Show my City</button>
             </div>
           </div>
           <div className="container-position">
             {
               loading ?
-                <h1>LOADING</h1>
+              <Loading></Loading>
                 : <div></div>
             }
             <h1 className="city">{city}{country}</h1>

@@ -14,7 +14,7 @@ body{
 
 
 .search-bar-container{
-  margin-top: 2rem;
+  margin-top: 2.5rem;
 }
 
 .container-style{
@@ -88,7 +88,19 @@ body{
 }
 
 .CFbutton{
+  padding: 0 .6rem 0 .6rem;
   margin: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+  border: solid white;
+  border-radius: 6px;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.CFbutton:focus, .CFbutton:visited, .CFbutton:active{
+
+  outline: none;
 }
 
 .units{
@@ -97,7 +109,7 @@ body{
     justify-content: center;
     text-align: center;
     flex-direction: column;
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: rgba(255, 255, 255, 0.61);
   margin-left: 0.5rem;
 }
