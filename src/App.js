@@ -197,7 +197,7 @@ function App() {
                 <input placeholder="Enter City" onChange={(elem)=>setInputOnChange(elem.target.value)}></input>
                 <input type="submit" value="Search"></input>
               </form>
-              <button id="current-city-1" onClick={currentLocation}>Show my City</button>
+              <button id="current-city-1" onClick={currentLocation}>Locate my City</button>
             </div>
         </div> 
       : 
@@ -211,7 +211,7 @@ function App() {
                 <input placeholder="Enter City" onChange={(elem)=>setInputOnChange(elem.target.value)}></input>
                 <input type="submit" value="Search"></input>
               </form>
-              <button id="current-city" onClick={currentLocation}>Show my City</button>
+              <button id="current-city" onClick={currentLocation}>Locate my City</button>
             </div>
           </div>
           <div className="container-position">
