@@ -25,6 +25,10 @@ body{
   margin: 0 auto 0 auto;
 }
 
+.container-style input:first-child{
+  width: 12rem;
+}
+
 .search-bar-start{
     display: flex;
     align-items: center;
@@ -38,10 +42,6 @@ body{
   margin-top: 4rem;
 }
 
-#current-city{
-  margin-top: 1rem;
-}
-
 #weather-font{
   font-family: 'Shrikhand', cursive;
   color: rgb(241, 114, 135);
@@ -49,6 +49,7 @@ body{
 }
 
 #weather-font-1{
+  position: relative;
   font-family: 'Shrikhand', cursive;
   font-size: 3rem;
   color: rgb(241, 114, 135);
@@ -64,7 +65,7 @@ body{
 }
 
 .container-style-1 input:first-child{
-  width: 14rem;
+  width: 15.5rem;
 }
 
 .container-style-1 input, .container-style-1 button{
@@ -112,4 +113,53 @@ body{
   font-size: 2.5rem;
   color: rgba(255, 255, 255, 0.61);
   margin-left: 0.5rem;
+}
+
+#current-city{
+  margin-top: 1rem;
+  border: solid 1px rgba(102, 102, 102, 0.979);
+  background-color: #efefef;
+  border-radius: 6px;
+  width: 100%;
+  padding: .2rem;
+  font-weight: 600;
+  color:rgb(65, 65, 65)
+}
+
+.form-1{
+  width: 100%;
+}
+
+#current-city-1{
+  margin-top: 1rem;
+  border: solid 1px rgba(102, 102, 102, 0.979);
+  background-color: #efefef;
+  border-radius: 6px;
+  width: 100%;
+  padding: .2rem;
+  font-weight: 600;
+  color:rgb(65, 65, 65)
+}
+
+.fa-sun-1{
+  position: relative;
+  bottom: 2.4rem;
+  left: 10.6rem;
+  z-index: -3;
+  margin: -2rem;
+  color: rgba(255, 255, 255, 0.616);
+}
+
+.slow-spin {
+  -webkit-animation: fa-spin 5s infinite linear;
+  animation: fa-spin 5s infinite linear;
+}
+
+.fa-sun-2{
+  position: relative;
+  bottom: 3rem;
+  left: 8.8rem;
+  z-index: -3;
+  margin: -2rem;
+  color: rgba(255, 255, 255, 0.616);
 }

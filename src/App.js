@@ -22,8 +22,6 @@ function App() {
 
   useEffect(()=>{
     if(cityInput !== null){
-      console.log("Calling data")
-      console.log("---------------------")
       fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&units=metric&appid=e6e87dada02bba6c6a163fe04f869432`)
       .then(response => response.json())
       .then(data => {
@@ -58,7 +56,6 @@ function App() {
         setUnits("")
         setWeather("")
         setIcon("")
-    console.log(cityInput)
     }
   },[letInputRender])
 
@@ -80,9 +77,7 @@ function App() {
   }
 
     const successCallback = (position) => {
-      console.log(position)
       const {latitude, longitude} = position.coords
-      console.log(latitude, longitude)
       fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=1fa3200a72be4c8c8d0f6849981d3882`)
         .then(response => response.json())
         .then(data => {
@@ -197,23 +192,25 @@ function App() {
     {
       reposition === null ? 
         <div className="search-bar-start">
-          <h1 id="weather-font-1">Weather App</h1>
+          <h1 id="weather-font-1">Weather App </h1>
+          <i class="fas fa-sun fa-sun-1 fa-3x fa-spin slow-spin"></i>
             <br></br>
             <div className="container-style-1">
               <form onSubmit={submitFunc}>
                 <input placeholder="Enter City" onChange={(elem)=>setInputOnChange(elem.target.value)}></input>
                 <input type="submit" value="Search"></input>
               </form>
-              <button id="current-city" onClick={currentLocation}>Show my City</button>
+              <button id="current-city-1" onClick={currentLocation}>Show my City</button>
             </div>
         </div> 
       : 
         <div>
             <div className="search-bar-container">
             <h1 id="weather-font">Weather App</h1>
+            <i class="fas fa-sun fa-sun-2 fa-2x"></i>
             <br></br>
             <div className="container-style">
-              <form onSubmit={submitFunc}>
+              <form className="form-1" onSubmit={submitFunc}>
                 <input placeholder="Enter City" onChange={(elem)=>setInputOnChange(elem.target.value)}></input>
                 <input type="submit" value="Search"></input>
               </form>
