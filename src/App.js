@@ -102,11 +102,11 @@ function App() {
     const converter = () => {
       if(units === " C"){
         const CtoF = (temp * (9/5)) + 32
-        setTemp(CtoF.toFixed(1))
+        setTemp(CtoF.toFixed(2))
         setUnits(" F")
       } else {
         const FtoC = (temp - 32) * 5/9
-        setTemp(FtoC.toFixed(1))
+        setTemp(FtoC.toFixed(2))
         setUnits(" C")
       }
       console.log(temp + units)
@@ -125,21 +125,18 @@ function App() {
         const colorGrayDark = ["50n"]
         colorRed.forEach(elem => {
           if(elem === iconCode){
-            console.log("RED")
             setBackgroundColor("linear-gradient(rgb(132, 200, 255),rgb(255, 207, 118))")
           }
         })
 
         colorBlueLight.forEach(elem => {
           if(elem === iconCode){
-            console.log("BlueLight")
             setBackgroundColor("linear-gradient(rgb(67, 133, 233),rgb(237, 238, 153))")
           }
         })
 
         colorYellow.forEach(elem => {
           if(elem === iconCode){
-            console.log("YELLOW")
             setBackgroundColor("linear-gradient(rgb(109, 45, 194),rgb(253, 255, 161))")
           }
         })
