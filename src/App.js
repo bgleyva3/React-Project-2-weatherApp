@@ -6,7 +6,6 @@ import Loading from "./Loading"
 function App() {
   const [reposition, setReposition] = useState(null)
   const [inputOnChange, setInputOnChange] = useState("inputKeeper")
-  const [cityInput, setCityInput] = useState(null)
   const [city, setCity] = useState("")
   const [country, setCountry] = useState("")
   const [temp, setTemp] = useState("")
@@ -18,11 +17,13 @@ function App() {
   const [backgroundColor, setBackgroundColor] = useState(null)
   const [iconCode, setIconCode] = useState(null)
   const [display, setDisplay] = useState("none")
+  const [location, setLocation] = useState(0)
+  const [url, setUrl] = useState(null)
 
 
   useEffect(()=>{
-    if(cityInput !== null){
-      fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityInput}&units=metric&appid=e6e87dada02bba6c6a163fe04f869432`)
+    if(url !== null){
+      fetch(`https://api.openweathermap.org/data/2.5/weather?${url}&units=metric&appid=e6e87dada02bba6c6a163fe04f869432`)
       .then(response => response.json())
       .then(data => {
         setCity(data["name"]+" / ")
@@ -36,12 +37,12 @@ function App() {
         setDisplay("inline-block")
       })
       .catch(err => alert(err))
-  }}, [cityInput])
+  }}, [url])
 
   const submitFunc = (elem) => {
     elem.preventDefault();
     setLoading(true)
-    setCityInput(null)
+    setUrl(null)
     setLetInputRender(Math.random())
     setDisplay("none")    
     setReposition(true)
@@ -49,7 +50,8 @@ function App() {
 
   useEffect(()=>{
     if(letInputRender !== null){
-        setCityInput(inputOnChange)
+        const urlCity = `q=${inputOnChange}`
+        setUrl(urlCity)
         setCity("")
         setCountry("")
         setTemp("")
@@ -62,41 +64,31 @@ function App() {
 
   //-------------current Location----------
 
-  const currentLocation = () => {
-    setLoading(true)
-    setReposition(true)
-    setCityInput(null)
-        setCity("")
-        setCountry("")
-        setTemp("")
-        setUnits("")
-        setWeather("")
-        setIcon("")
-        setDisplay("none")
-    navigator.geolocation.getCurrentPosition(successCallback, errorCallback)
-  }
-
-    const successCallback = (position) => {
-      const {latitude, longitude} = position.coords
-      fetch(`https://api.opencagedata.com/geocode/v1/json?q=${latitude}+${longitude}&key=1fa3200a72be4c8c8d0f6849981d3882`)
-        .then(response => response.json())
-        .then(data => {
-          const stringAddress = data.results[0].formatted;
-          const emptyAddress = stringAddress.replace(/\d+/g, '') 
-          const arrayAddress = emptyAddress.split(",")
-          arrayAddress.splice(0,1)
-          arrayAddress.splice(0,1)
-          let currentAddress = arrayAddress.join()
-          currentAddress = currentAddress.trim()
-          setCityInput(currentAddress)
-          console.log(cityInput)
-          console.log(currentAddress)
-        })
+  useEffect(()=>{
+    if(location>0){
+      setLoading(true)
+      setReposition(true)
+      setUrl(null)
+      setCity("")
+      setCountry("")
+      setTemp("")
+      setUnits("")
+      setWeather("")
+      setIcon("")
+      setDisplay("none")
+      navigator.geolocation.getCurrentPosition(successCallback, errorCallback)
     }
-
-    const errorCallback = (err) => {
-      alert(err.message)
-    }
+  },[location])
+  
+      const successCallback = (position) => {
+        const {latitude, longitude} = position.coords
+        setUrl(`lat=${latitude}&lon=${longitude}`)
+      }
+  
+      const errorCallback = (err) => {
+        alert(err.message)
+      }
+  
 //---------------------------------------------
 
     const converter = () => {
@@ -197,7 +189,7 @@ function App() {
                 <input placeholder="Enter City" onChange={(elem)=>setInputOnChange(elem.target.value)}></input>
                 <input type="submit" value="Search"></input>
               </form>
-              <button id="current-city-1" onClick={currentLocation}>Locate my City</button>
+              <button id="current-city-1" onClick={()=>setLocation(location+1)}>Locate my City</button>
             </div>
         </div> 
       : 
@@ -211,7 +203,7 @@ function App() {
                 <input placeholder="Enter City" onChange={(elem)=>setInputOnChange(elem.target.value)}></input>
                 <input type="submit" value="Search"></input>
               </form>
-              <button id="current-city" onClick={currentLocation}>Locate my City</button>
+              <button id="current-city" onClick={()=>setLocation(location+1)}>Locate my City</button>
             </div>
           </div>
           <div className="container-position">
